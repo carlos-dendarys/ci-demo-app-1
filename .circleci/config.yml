@@ -1,0 +1,86 @@
+version: 2
+
+general:
+  artifacts:
+    - "coverage/"
+  branches:
+    only:
+      - master
+      - staging
+      - /feature.*/
+
+jobs:
+  build:
+    docker:
+
+      - image: circleci/node:8.9.1
+
+      - image: redis
+
+      - image: mongo:3.4.4
+
+    working_directory: ~/repo
+
+    environment:
+      # Configuration related to the Heroku deployment.
+      - HEROKU_APP_NAME: ci-demo-app-1
+
+      - MONGO_DB_URL: cadmongo:test1234@ds225608.mlab.com:25608/nodetest1
+
+      # Configuration related to the Integration Tests.
+      - GHOST_INSPECTOR_API_KEY: 9579d4c43b01495f8ac33937add40fde0629c210
+      - GHOST_INSPECTOR_SUITE_ID: 5a79fdb6ee8c5b4204c81783
+
+      # Environment variables
+      - GH_WEBHOOK_SECRET: abc123
+
+    steps:
+      - checkout
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Running legacy tests
+          command: yarn run test
+
+      - run:
+          name: Running coverage task
+          command: yarn run test:coverage
+
+      - run: mkdir /tmp/test-results
+
+      - store_artifacts:
+           path: coverage
+
+      - run:
+          name: Configuring Heroku client
+          command: bash .circleci/setup-heroku.sh
+
+      - add_ssh_keys:
+          fingerprints:
+            - "48:a0:87:54:ca:75:32:12:c6:9e:a2:77:a4:7a:08:a4"
+
+      - run:
+          name: Moving script files
+          command: |
+            mkdir /tmp/circleci-tools
+            cp -R test-utils /tmp/circleci-tools/test-utils
+            cp .circleci/run_deploy_app.sh /tmp/circleci-tools/
+            cp .circleci/run_integration_tests.sh /tmp/circleci-tools/
+
+      - deploy:
+          name: Deploy to Heroku
+          command: |
+            chmod +x /tmp/circleci-tools/run_deploy_app.sh
+            /tmp/circleci-tools/run_deploy_app.sh
+
+      - run:
+          name: Running Integration Tests
+          command: |
+            chmod +x /tmp/circleci-tools/run_integration_tests.sh
+            /tmp/circleci-tools/run_integration_tests.sh
