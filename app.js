@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 // New Code
 var mongo = require('mongodb');
 var monk = require('monk');
-// var db = monk('localhost:27017/nodetest1');
 
 var db = monk(process.env.MONGO_DB_URL);
 
@@ -29,9 +28,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+console.log('running configuration');
+
 // Make our db accessible to our router
 app.use(function(req,res,next){
     req.db = db;
+    console.log('Setting db connection');
     next();
 });
 

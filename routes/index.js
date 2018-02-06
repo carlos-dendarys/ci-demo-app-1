@@ -3,16 +3,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('index', { title: 'Express' });
-});
-
-/* GET Hello World page. */
-router.get('/helloworld', function(req, res) {
-	res.render('helloworld', { title: 'Hello, World!' })
+    res.render('index', { title: 'CI Demo' });
 });
 
 /* GET Userlist page. */
 router.get('/userlist', function(req, res) {
+    console.log('List of users');
     var db = req.db;
     var collection = db.get('usercollection');
     collection.find({},{},function(e,docs){
@@ -20,6 +16,12 @@ router.get('/userlist', function(req, res) {
             "userlist" : docs
         });
     });
+});
+
+/* GET New User page. */
+router.get('/userdetail', function(req, res) {
+  console.log('Retrieving user detail');
+  res.render('userdetail', { username: req.query.username, useremail: req.query.email });
 });
 
 /* GET New User page. */
