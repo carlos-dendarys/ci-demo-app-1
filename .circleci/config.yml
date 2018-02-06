@@ -45,10 +45,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: Running legacy tests
-          command: yarn run test
-
-      - run:
           name: Running coverage task
           command: yarn run test:coverage
 
