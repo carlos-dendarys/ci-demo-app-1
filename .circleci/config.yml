@@ -24,8 +24,6 @@ jobs:
       # Configuration related to the Heroku deployment.
       - HEROKU_APP_NAME: ci-demo-app-1
 
-      - MONGO_DB_URL: cadmongo:test1234@ds225608.mlab.com:25608/nodetest1
-
       # Configuration related to the Integration Tests.
       - GHOST_INSPECTOR_API_KEY: 9579d4c43b01495f8ac33937add40fde0629c210
       - GHOST_INSPECTOR_SUITE_ID: 5a79fdb6ee8c5b4204c81783
