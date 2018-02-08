@@ -3,7 +3,7 @@ extends layout
 block content
     h1.
         User List
-    ul
+    ul.listUsers
         each user, i in userlist
             li
                 a(href="/userdetails?email=#{user.email}&username=#{user.username}")= user.username

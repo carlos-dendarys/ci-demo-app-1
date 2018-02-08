@@ -7,7 +7,6 @@ general:
     only:
       - master
       - staging
-      - /feature.*/
 
 jobs:
   build:
