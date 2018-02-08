@@ -1,33 +1,26 @@
 {
- "name": "nodetest1-2017",
- "version": "0.0.0",
- "private": true,
- "jest": {
-  "roots": [
-   "test"
-  ],
-  "coverageReporters": [
-   "html",
-   "text"
-  ]
- },
- "dependencies": {
-  "body-parser": "~1.18.2",
-  "cookie-parser": "~1.4.3",
-  "debug": "~2.6.9",
-  "express": "~4.15.5",
-  "jade": "~1.11.0",
-  "mongodb": "~3.0.1",
-  "monk": "~6.0.5",
-  "morgan": "~1.9.0",
-  "serve-favicon": "~2.4.5",
-  "jest": "^21.2.1",
-  "jest-cli": "^21.2.1",
-  "jest-fetch-mock": "^1.4.1"
- },
- "scripts": {
-  "start": "node ./bin/www",
-  "start-env": "source setup-env.sh && node ./bin/www",
-  "test:coverage": "jest --coverage --forceExit"
- }
+  "name": "ci-demo-app-1",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "jade": "~1.11.0",
+    "mongodb": "~3.0.1",
+    "monk": "~6.0.5",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
+    "jest-fetch-mock": "^1.4.1"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "start-env": "source setup-env.sh && node ./bin/www",
+    "test:coverage": "jest --coverage --forceExit"
+  }
 }
