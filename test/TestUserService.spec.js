@@ -7,7 +7,7 @@ describe('Tests', async () => {
 
     let requestMock = {
       query: {
-        username: 'cad1',
+        username: 'cad',
         email: 'cad@email.com'
       }
     };
