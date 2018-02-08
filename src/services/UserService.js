@@ -3,7 +3,7 @@
  * @param req
  * @param res
  */
-function userdetail(req, res) {
+function userDetails(req, res) {
   console.log('Retrieving user detail');
   res.render('userdetails', {username: req.query.username, useremail: req.query.email});
 }
@@ -58,7 +58,7 @@ function adduser(req, res) {
 
 
 module.exports = {
-  userDetails: userdetail,
+  userDetails,
   userlist,
   adduser
 }
