@@ -44,7 +44,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: Running coverage task
+          name: Running tests and coverage
           command: yarn run test:coverage
 
       - run: mkdir /tmp/test-results
