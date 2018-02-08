@@ -5,8 +5,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-// New Code
-const mongo = require('mongodb');
 const monk = require('monk');
 
 const db = monk(process.env.MONGO_DB_URL);
